@@ -1,12 +1,16 @@
 import Link from "next/link";
+import iconShop from "../../../../public/iconShop.svg";
+import Image from "next/image";
 
 export function Navbar() {
 	return (
-		<nav className='h-[80px] bg-white text-black shadow-md'>
-			<div className='container mx-auto flex h-full items-center justify-between px-4'>
+		<nav className='h-[122px] bg-white text-black shadow-md whitespace-nowrap'>
+			<div className='mx-auto flex h-full items-center justify-between px-4'>
 				<div className='flex items-center'>
 					<Link href='/'>
-						<div className='text-2xl font-bold cursor-pointer'>test</div>
+						<div className='cursor-pointer]'>
+							<Image src={iconShop} alt='' width={70} height={70} />
+						</div>
 					</Link>
 				</div>
 				<div className='flex-grow'></div>
