@@ -1,7 +1,7 @@
 export function Header() {
 	return (
 		<header className='bg-gray-50 w-full h-96'>
-			<div className='container py-16 text-center'>
+			<div className='text-center items-center justify-center flex flex-col h-[22rem]'>
 				<h1 className="text-4xl font-bold font-['Verdena, sans-serif'] text-gray-800">
 					Najlepsze ceny dla Twojej firmy!
 				</h1>
