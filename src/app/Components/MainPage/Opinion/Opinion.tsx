@@ -30,7 +30,7 @@ export function Opinion() {
 								</div>
 								<div className='ml-6 flex flex-col justify-center'>
 									<p className='text-gray-400 font-semibold'>Anna Kowalska</p>
-									<p className='text-gray-400'>
+									<p className='text-gray-400 text-md'>
 										Właścicielka sklepu papierniczego
 									</p>
 								</div>
@@ -59,7 +59,7 @@ export function Opinion() {
 								</div>
 								<div className='ml-6 flex flex-col justify-center'>
 									<p className='text-gray-400 font-semibold'>Michał Nowak</p>
-									<p className='text-gray-400'>Prezes korporacji</p>
+									<p className='text-gray-400 text-md'>Prezes korporacji</p>
 								</div>
 							</div>
 						</div>
@@ -86,7 +86,9 @@ export function Opinion() {
 								</div>
 								<div className='ml-6 flex flex-col justify-center'>
 									<p className='text-gray-400 font-semibold'>Ewa Jankowska</p>
-									<p className='text-gray-400'>Właścicielka biura księgowego</p>
+									<p className='text-gray-400 text-md'>
+										Właścicielka biura księgowego
+									</p>
 								</div>
 							</div>
 						</div>
