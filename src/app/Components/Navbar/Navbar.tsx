@@ -8,7 +8,7 @@ export function Navbar() {
 			<div className='mx-auto flex h-full items-center justify-between px-4'>
 				<div className='flex items-center'>
 					<Link href='/'>
-						<div className='cursor-pointer]'>
+						<div className='ml-6 cursor-pointer'>
 							<Image src={iconShop} alt='' width={70} height={70} />
 						</div>
 					</Link>
