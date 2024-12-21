@@ -39,12 +39,12 @@ export function Navbar() {
 				</div>
 				<div className='hidden md:flex items-center space-x-4'>
 					<Link
-						href=''
+						href='/login'
 						className='border border-gray-300 px-4 py-2 rounded hover:bg-gray-200'>
 						Zaloguj się
 					</Link>
 					<Link
-						href=''
+						href='/register'
 						className='bg-black text-white px-4 py-2 rounded hover:bg-gray-800'>
 						Zarejestruj się
 					</Link>
