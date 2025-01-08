@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Register() {
 	return (
-		<div className='flex flex-col justify-center p-4'>
+		<div className='flex flex-col justify-center px-6 py-12 lg:px-8'>
 			<div className='max-w-md w-full mx-auto border border-gray-300 rounded-2xl p-8'>
 				<div className='text-center mb-12'>
 					<Link href='/'>
