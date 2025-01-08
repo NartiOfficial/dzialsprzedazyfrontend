@@ -1,93 +1,99 @@
-import Link from "next/link";
-import Image from "next/image";
+"use client";
 
-export default function Register() {
+import React, { useState, FormEvent } from "react";
+import axios, { AxiosError } from "axios";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+
+export default function RegisterPage() {
+	const router = useRouter();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const [errorMessage, setErrorMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState("");
+
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		setErrorMessage("");
+		setSuccessMessage("");
+
+		if (!email || !password) {
+			setErrorMessage("Email i hasło są wymagane!");
+			return;
+		}
+
+		try {
+			const response = await axios.post("/api/register", {
+				email,
+				password,
+			});
+
+			if (response.status === 201) {
+				setSuccessMessage("Rejestracja zakończona powodzeniem!");
+				router.push("/login");
+			}
+		} catch (err) {
+			const error = err as AxiosError<{ message?: string }>;
+			const backendMessage = error.response?.data?.message;
+			setErrorMessage(backendMessage || "Błąd rejestracji");
+		}
+	};
+
 	return (
-		<div className='flex flex-col justify-center p-4'>
-			<div className='max-w-md w-full mx-auto border border-gray-300 rounded-2xl p-8'>
-				<div className='text-center mb-12'>
-					<Link href='/'>
-						<div className='cursor-pointer text-center'>
-							<Image
-								className='mx-auto h-auto w-auto'
-								src='/iconShop.svg'
-								alt='Shop Icon'
-								width={70}
-								height={70}
-							/>
-						</div>
-					</Link>
-					<h2 className='mt-6 text-center text-2xl font-bold tracking-tight text-gray-900'>
-						Zarejestruj się
-					</h2>
+		<div className='max-w-md mx-auto mt-10 p-4 border border-gray-300 rounded-md'>
+			<h2 className='text-2xl font-bold mb-4 text-center'>Zarejestruj się</h2>
+
+			{errorMessage && (
+				<div className='text-red-500 text-sm mb-4'>{errorMessage}</div>
+			)}
+			{successMessage && (
+				<div className='text-green-500 text-sm mb-4'>{successMessage}</div>
+			)}
+
+			<form onSubmit={handleSubmit} className='space-y-4'>
+				<div>
+					<label className='block mb-1 text-sm font-medium text-gray-700'>
+						Email
+					</label>
+					<input
+						type='email'
+						required
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						className='w-full p-2 border border-gray-300 rounded-md'
+					/>
 				</div>
 
-				<form>
-					<div className='space-y-4'>
-						<div>
-							<label className='text-gray-800 text-sm mb-2 block'>Email</label>
-							<input
-								name='email'
-								type='text'
-								className='block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 border border-gray-300 placeholder-gray-400 focus:outline-none  focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm'
-							/>
-						</div>
-						<div>
-							<label className='text-gray-800 text-sm mb-2 block'>Hasło</label>
-							<input
-								name='password'
-								type='password'
-								className='block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm'
-							/>
-						</div>
-						<div>
-							<label className='text-gray-800 text-sm mb-2 block'>
-								Powtórz hasło
-							</label>
-							<input
-								name='cpassword'
-								type='password'
-								className='block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm'
-							/>
-						</div>
+				<div>
+					<label className='block mb-1 text-sm font-medium text-gray-700'>
+						Hasło
+					</label>
+					<input
+						type='password'
+						required
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						className='w-full p-2 border border-gray-300 rounded-md'
+					/>
+				</div>
 
-						<div className='flex items-center'>
-							<input
-								id='remember-me'
-								name='remember-me'
-								type='checkbox'
-								className='h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
-							/>
-							<label
-								htmlFor='remember-me'
-								className='text-gray-800 ml-3 block text-sm'>
-								Akceptuje
-								<a
-									href='#'
-									className='text-blue-600 font-semibold hover:underline ml-1'>
-									warunki i postawnowienia
-								</a>
-							</label>
-						</div>
-					</div>
+				<button
+					type='submit'
+					className='block w-full bg-indigo-600 text-white font-semibold py-2 rounded-md hover:bg-indigo-500'>
+					Zarejestruj
+				</button>
+			</form>
 
-					<div className='!mt-4'>
-						<button
-							type='button'
-							className='w-full py-2 px-4 text-sm tracking-wider font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600'>
-							Utwórz konto
-						</button>
-					</div>
-					<p className='text-gray-800 text-sm mt-6 text-center'>
-						Masz już konto?
-						<a
-							href='/login'
-							className='text-indigo-600 hover:text-indigo-500 font-semibold hover:underline ml-1'>
-							Zaloguj się
-						</a>
-					</p>
-				</form>
-			</div>
+			<p className='text-center mt-4 text-sm text-gray-600'>
+				Masz już konto?{" "}
+				<Link
+					href='/login'
+					className='font-semibold text-indigo-600 hover:underline'>
+					Zaloguj się
+				</Link>
+			</p>
 		</div>
 	);
 }
