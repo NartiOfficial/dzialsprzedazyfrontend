@@ -64,6 +64,25 @@ export default function RegisterPage() {
 						onChange={(e) => setEmail(e.target.value)}
 						className='w-full p-2 border border-gray-300 rounded-md'
 					/>
+
+		<div className='flex flex-col justify-center px-6 py-12 lg:px-8'>
+			<div className='max-w-md w-full mx-auto border border-gray-300 rounded-2xl p-8'>
+				<div className='text-center mb-12'>
+					<Link href='/'>
+						<div className='cursor-pointer text-center'>
+							<Image
+								className='mx-auto h-auto w-auto'
+								src='/iconShop.svg'
+								alt='Shop Icon'
+								width={70}
+								height={70}
+							/>
+						</div>
+					</Link>
+					<h2 className='mt-6 text-center text-2xl font-bold tracking-tight text-gray-900'>
+						Zarejestruj się
+					</h2>
+ 
 				</div>
 
 				<div>
