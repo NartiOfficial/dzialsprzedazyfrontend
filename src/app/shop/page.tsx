@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { products } from "../lib/products";
@@ -9,7 +10,8 @@ export default function Shop() {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [sortOption, setSortOption] = useState("new");
 
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value);
+	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+		setSearchTerm(e.target.value);
 	const handleSort = (option: string) => setSortOption(option);
 
 	const filteredProducts = products
@@ -102,16 +104,15 @@ export default function Shop() {
 				</div>
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
 					{filteredProducts.map((product) => (
-						<div
-							key={product.id}
-							className='border border-gray-200 rounded p-4 text-center shadow-sm cursor-pointer'
-							onClick={() => router.push(`/shop/${product.id}`)}>
-							<div className='h-32 bg-gray-100 flex items-center justify-center rounded mb-2'>
-								<span className='text-gray-400'>[Image]</span>
+						<Link href={`/shop/${product.id}`} key={product.id}>
+							<div className='border border-gray-200 rounded p-4 text-center shadow-sm cursor-pointer hover:bg-gray-50'>
+								<div className='h-32 bg-gray-100 flex items-center justify-center rounded mb-2'>
+									<span className='text-gray-400'>[Image]</span>
+								</div>
+								<h4 className='font-semibold'>{product.name}</h4>
+								<p className='text-gray-600'>{product.price} PLN</p>
 							</div>
-							<h4 className='font-semibold'>{product.name}</h4>
-							<p className='text-gray-600'>{product.price} PLN</p>
-						</div>
+						</Link>
 					))}
 				</div>
 			</main>
