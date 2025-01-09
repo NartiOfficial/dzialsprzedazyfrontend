@@ -2,27 +2,15 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-const products = [
-	{ id: 1, name: "Organizer biurkowy - Minimalistyczny design", price: 50 },
-	{ id: 2, name: "Podstawka pod laptop – Ergonomiczne wsparcie", price: 50 },
-	{ id: 3, name: "Organizer na kable – Porządek na biurku", price: 40 },
-	{
-		id: 4,
-		name: "Podkładka ochronna na biurko – Styl i funkcjonalność",
-		price: 60,
-	},
-	{ id: 5, name: "Stojak na długopisy – Nowoczesny design", price: 30 },
-	{ id: 6, name: "Podstawka na smartfon – Stylowy dodatek", price: 45 },
-];
+import { products } from "../lib/products";
 
 export default function Shop() {
 	const router = useRouter();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [sortOption, setSortOption] = useState("new");
 
-	const handleSearch = (e) => setSearchTerm(e.target.value);
-	const handleSort = (option) => setSortOption(option);
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value);
+	const handleSort = (option: string) => setSortOption(option);
 
 	const filteredProducts = products
 		.filter((product) =>
@@ -117,7 +105,7 @@ export default function Shop() {
 						<div
 							key={product.id}
 							className='border border-gray-200 rounded p-4 text-center shadow-sm cursor-pointer'
-							onClick={() => router.push(`/product/${product.id}`)}>
+							onClick={() => router.push(`/shop/${product.id}`)}>
 							<div className='h-32 bg-gray-100 flex items-center justify-center rounded mb-2'>
 								<span className='text-gray-400'>[Image]</span>
 							</div>

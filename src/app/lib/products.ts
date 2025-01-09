@@ -1,4 +1,12 @@
-export const products = [
+export interface Product {
+	id: number;
+	name: string;
+	price: number;
+	description?: string;
+	details?: string;
+}
+
+export const products: Product[] = [
 	{
 		id: 1,
 		name: "Organizer biurkowy - Minimalistyczny design",
@@ -13,7 +21,11 @@ export const products = [
 		price: 50,
 		description: "Pomaga ergonomicznie ustawić laptopa.",
 	},
-	{ id: 3, name: "Organizer na kable – Porządek na biurku", price: 40 },
+	{
+		id: 3,
+		name: "Organizer na kable – Porządek na biurku",
+		price: 40,
+	},
 	{
 		id: 4,
 		name: "Podkładka ochronna na biurko – Styl i funkcjonalność",
