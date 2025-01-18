@@ -4,7 +4,7 @@ import React, { useState, FormEvent } from "react";
 import axios, { AxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import Image from "next/image";
 
 export default function RegisterPage() {
 	const router = useRouter();
@@ -32,7 +32,7 @@ export default function RegisterPage() {
 
 			if (response.status === 201) {
 				setSuccessMessage("Rejestracja zakończona powodzeniem!");
-				router.push("/login");
+				setTimeout(() => router.push("/login"), 2000);
 			}
 		} catch (err) {
 			const error = err as AxiosError<{ message?: string }>;
@@ -42,32 +42,9 @@ export default function RegisterPage() {
 	};
 
 	return (
-		<div className='max-w-md mx-auto mt-10 p-4 border border-gray-300 rounded-md'>
-			<h2 className='text-2xl font-bold mb-4 text-center'>Zarejestruj się</h2>
-
-			{errorMessage && (
-				<div className='text-red-500 text-sm mb-4'>{errorMessage}</div>
-			)}
-			{successMessage && (
-				<div className='text-green-500 text-sm mb-4'>{successMessage}</div>
-			)}
-
-			<form onSubmit={handleSubmit} className='space-y-4'>
-				<div>
-					<label className='block mb-1 text-sm font-medium text-gray-700'>
-						Email
-					</label>
-					<input
-						type='email'
-						required
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						className='w-full p-2 border border-gray-300 rounded-md'
-					/>
-
 		<div className='flex flex-col justify-center px-6 py-12 lg:px-8'>
 			<div className='max-w-md w-full mx-auto border border-gray-300 rounded-2xl p-8'>
-				<div className='text-center mb-12'>
+				<div className='text-center mb-8'>
 					<Link href='/'>
 						<div className='cursor-pointer text-center'>
 							<Image
@@ -79,40 +56,65 @@ export default function RegisterPage() {
 							/>
 						</div>
 					</Link>
-					<h2 className='mt-6 text-center text-2xl font-bold tracking-tight text-gray-900'>
+					<h2 className='mt-4 text-center text-2xl font-bold tracking-tight text-gray-900'>
 						Zarejestruj się
 					</h2>
- 
 				</div>
 
-				<div>
-					<label className='block mb-1 text-sm font-medium text-gray-700'>
-						Hasło
-					</label>
-					<input
-						type='password'
-						required
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						className='w-full p-2 border border-gray-300 rounded-md'
-					/>
-				</div>
+				{errorMessage && (
+					<div className='text-red-500 text-sm mb-4 text-center'>
+						{errorMessage}
+					</div>
+				)}
+				{successMessage && (
+					<div className='text-green-500 text-sm mb-4 text-center'>
+						{successMessage}
+					</div>
+				)}
 
-				<button
-					type='submit'
-					className='block w-full bg-indigo-600 text-white font-semibold py-2 rounded-md hover:bg-indigo-500'>
-					Zarejestruj
-				</button>
-			</form>
+				<form onSubmit={handleSubmit} className='space-y-6'>
+					<div>
+						<label className='block mb-1 text-sm font-medium text-gray-700'>
+							Email
+						</label>
+						<input
+							type='email'
+							required
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							className='w-full p-2 border border-gray-300 rounded-md'
+						/>
+					</div>
 
-			<p className='text-center mt-4 text-sm text-gray-600'>
-				Masz już konto?{" "}
-				<Link
-					href='/login'
-					className='font-semibold text-indigo-600 hover:underline'>
-					Zaloguj się
-				</Link>
-			</p>
+					<div>
+						<label className='block mb-1 text-sm font-medium text-gray-700'>
+							Hasło
+						</label>
+						<input
+							type='password'
+							required
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							className='w-full p-2 border border-gray-300 rounded-md'
+						/>
+					</div>
+
+					<button
+						type='submit'
+						className='block w-full bg-indigo-600 text-white font-semibold py-2 rounded-md hover:bg-indigo-500'>
+						Zarejestruj
+					</button>
+				</form>
+
+				<p className='text-center mt-4 text-sm text-gray-600'>
+					Masz już konto?{" "}
+					<Link
+						href='/login'
+						className='font-semibold text-indigo-600 hover:underline'>
+						Zaloguj się
+					</Link>
+				</p>
+			</div>
 		</div>
 	);
 }
